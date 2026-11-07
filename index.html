@@ -131,6 +131,7 @@ function renumber(){document.querySelectorAll('.entry-head span').forEach((e,i)=
 function val(id){return document.getElementById(id).value.trim();}
 function fmtDate(s){if(!s)return '';let [y,m,d]=s.split('-');return `${d}.${m}.${y}`;}
 function fmtTime(s){return s?s+' HRS':'';}
+function fmtSubmitDate(s){if(!s)return '';let [y,m,d]=s.split('-');return `${d}/${m}/${y}`;}
 function cell(s){return esc(s||'');}
 function generatePDF(){
  const name=val('name'),pen=val('pen'),month=val('month'),year=val('year');
@@ -171,7 +172,7 @@ function generatePDF(){
  <tbody>${body}</tbody>
  </table>
  <div class="submission">SUBMITTED TO ${cell(val('submittedTo'))} FOR FAVOUR FURTHER NECESSARY ACTION</div>
- <div class="footer"><div>DATE : ${cell(val('submitDate'))}<br>PLACE : ${cell(val('place'))}</div><div>NAME : ${cell(name.toUpperCase())}<br>RANK &amp; GL NO : ${cell(val('rank'))}<br>PEN : ${cell(pen)}<br><b>${cell(val('company').toUpperCase())}</b></div></div>`;
+ <div class="footer"><div>DATE : ${cell(fmtSubmitDate(val('submitDate')))}<br>PLACE : ${cell(val('place'))}</div><div>NAME : ${cell(name.toUpperCase())}<br>RANK &amp; GL NO : ${cell(val('rank'))}<br>PEN : ${cell(pen)}<br><b>${cell(val('company').toUpperCase())}</b></div></div>`;
  const el=document.getElementById('paper');
  const filename=`Tour_Note_${name.replace(/[^a-z0-9]/gi,'_')}_${month}_${year}.pdf`;
  const opt={
